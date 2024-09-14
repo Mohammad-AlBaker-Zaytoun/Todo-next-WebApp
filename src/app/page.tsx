@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { TodoList } from "@/components/TodoList"; // Import the client component
 
 export default function Home() {
