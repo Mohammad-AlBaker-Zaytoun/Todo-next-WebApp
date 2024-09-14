@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link"; // For navigation to the /new route
-import { TodoItem } from "@/components/TodoItem"; // Import the TodoItem component
+import { TodoItem } from "@/components/TodoItem";
+import Link from "next/link";
 
 type TodoItemType = {
   id: string;
@@ -10,20 +10,42 @@ type TodoItemType = {
   complete: boolean;
 };
 
-export function TodoList() {
+type TodoListProps = {
+  updateTodoStats: (todos: TodoItemType[]) => void; // Callback to update todos and completed counts
+};
+
+export function TodoList({ updateTodoStats }: TodoListProps) {
   const [todos, setTodos] = useState<TodoItemType[]>([]);
 
   // Load todos from Local Storage on mount
   useEffect(() => {
     const storedTodos = localStorage.getItem("todos");
     if (storedTodos) {
-      setTodos(JSON.parse(storedTodos));
+      const todosArray = JSON.parse(storedTodos);
+      setTodos(todosArray);
+      updateTodoStats(todosArray); // Update stats on initial load
     }
   }, []);
 
-  // Save todos to Local Storage
+  // Save todos to Local Storage and update stats
   const saveToLocalStorage = (updatedTodos: TodoItemType[]) => {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    updateTodoStats(updatedTodos); // Update the counts when todos are modified
+  };
+
+  // Add a new todo
+  const addTodo = () => {
+    const title = prompt("Enter the new todo title");
+    if (title) {
+      const newTodo: TodoItemType = {
+        id: Date.now().toString(),
+        title,
+        complete: false,
+      };
+      const updatedTodos = [...todos, newTodo];
+      setTodos(updatedTodos);
+      saveToLocalStorage(updatedTodos);
+    }
   };
 
   // Toggle the completion status of a todo
@@ -52,7 +74,7 @@ export function TodoList() {
   };
 
   return (
-    <div>
+    <div className="m-7 mt-12">
       <Link
         href="/new"
         className="border border-gray-300 text-gray-300 px-2 py-1 mb-4 rounded hover:bg-gray-700"
@@ -60,6 +82,7 @@ export function TodoList() {
         Add Todo
       </Link>
 
+      {/* Display the Todos */}
       <ul className="mt-5">
         {todos.map((todo) => (
           <TodoItem

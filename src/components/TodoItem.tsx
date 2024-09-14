@@ -8,7 +8,7 @@ type TodoItemProps = {
   complete: boolean;
   toggleTodo: (id: string, complete: boolean) => void;
   onDelete: (id: string) => void;
-  onUpdate: (id: string, newTitle: string) => void; 
+  onUpdate: (id: string, newTitle: string) => void;
 };
 
 export function TodoItem({
@@ -34,30 +34,32 @@ export function TodoItem({
   };
 
   return (
-    <li className="flex gap-1 items-center">
+    <li className="flex gap-3 items-center py-2 text-lg"> {/* Slightly smaller font and padding */}
       {!isEditing && (
         <>
           <input
             id={id}
             type="checkbox"
-            className="cursor-pointer peer"
+            className="cursor-pointer peer h-5 w-5"  // Smaller checkbox
             defaultChecked={complete}
             onChange={(e) => toggleTodo(id, e.target.checked)}
           />
           <label
             htmlFor={id}
-            className="peer-checked:line-through cursor-pointer peer-checked:text-slate-500"
+            className={`peer-checked:line-through cursor-pointer peer-checked:text-slate-500 ${
+              complete ? "line-through text-gray-500" : "text-white"
+            }`}
           >
             {title}
           </label>
           <button
-            className="ml-2 text-blue-500"
+            className="ml-3 text-blue-500 hover:underline"
             onClick={() => setIsEditing(true)}
           >
             Edit
           </button>
           <button
-            className="ml-2 text-red-500"
+            className="ml-3 text-red-500 hover:underline"
             onClick={handleDeleteTodo}
           >
             Delete
@@ -66,20 +68,20 @@ export function TodoItem({
       )}
 
       {isEditing && (
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-3 items-center">
           <input
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
-            className="border border-gray-300 px-2 py-1 text-black"
+            className="border border-gray-300 px-2 py-1 text-lg text-black"  // Smaller input
           />
           <button
-            className="px-2 py-1 bg-green-500 text-white rounded"
+            className="px-2 py-1 bg-green-500 text-white rounded text-lg"
             onClick={handleUpdate}
           >
             Save
           </button>
           <button
-            className="px-2 py-1 bg-red-500 text-white rounded"
+            className="px-2 py-1 bg-red-500 text-white rounded text-lg"
             onClick={() => setIsEditing(false)}
           >
             Cancel
