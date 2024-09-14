@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { TodoList } from "@/components/TodoList"; // Use your TodoList component
 
 export default function Home() {
