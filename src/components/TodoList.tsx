@@ -33,21 +33,6 @@ export function TodoList({ updateTodoStats }: TodoListProps) {
     updateTodoStats(updatedTodos); // Update the counts when todos are modified
   };
 
-  // Add a new todo
-  const addTodo = () => {
-    const title = prompt("Enter the new todo title");
-    if (title) {
-      const newTodo: TodoItemType = {
-        id: Date.now().toString(),
-        title,
-        complete: false,
-      };
-      const updatedTodos = [...todos, newTodo];
-      setTodos(updatedTodos);
-      saveToLocalStorage(updatedTodos);
-    }
-  };
-
   // Toggle the completion status of a todo
   const toggleTodo = (id: string, complete: boolean) => {
     const updatedTodos = todos.map((todo) =>
