@@ -3,9 +3,26 @@
 import { useState, useEffect } from "react";
 import { TodoList } from "@/components/TodoList"; // Use your TodoList component
 
+// Define the type for the weather response
+type WeatherData = {
+  name: string;
+  main: {
+    temp: number;
+  };
+  weather: {
+    description: string;
+  }[];
+};
+
+type TodoItemType = {
+  id: string;
+  title: string;
+  complete: boolean;
+};
+
 export default function Home() {
   const [dateTime, setDateTime] = useState<string | null>(null);
-  const [weather, setWeather] = useState<any>(null);
+  const [weather, setWeather] = useState<WeatherData | null>(null); // Type the weather state
   const [todosCount, setTodosCount] = useState(0);
   const [completedTodos, setCompletedTodos] = useState(0);
 
@@ -13,7 +30,7 @@ export default function Home() {
   useEffect(() => {
     const storedTodos = localStorage.getItem("todos");
     if (storedTodos) {
-      const todosArray = JSON.parse(storedTodos);
+      const todosArray: TodoItemType[] = JSON.parse(storedTodos); // Type the todos array
       updateTodoStats(todosArray);
     }
 
@@ -40,7 +57,7 @@ export default function Home() {
       const weatherResponse = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
       );
-      const weatherData = await weatherResponse.json();
+      const weatherData: WeatherData = await weatherResponse.json(); // Type the weather data
       setWeather(weatherData);
     } catch (error) {
       console.error("Failed to fetch weather data", error);
@@ -48,10 +65,9 @@ export default function Home() {
   };
 
   // Update both the total todos count and completed todos count
-  const updateTodoStats = (todosArray: any[]) => {
+  const updateTodoStats = (todosArray: TodoItemType[]) => {
     const totalTodos = todosArray.length;
-    const completedCount = todosArray.filter((todo: any) => todo.complete)
-      .length;
+    const completedCount = todosArray.filter((todo) => todo.complete).length;
 
     setTodosCount(totalTodos);
     setCompletedTodos(completedCount);
