@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
+// Metadata API: Configure page title and favicon
 export const metadata: Metadata = {
   title: "To Do App",
+  icons: {
+    icon: "/check.png",  
+  },
 };
 
 export default function RootLayout({
