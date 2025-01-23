@@ -1,0 +1,14 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Contact: mailto:mabzaytoun@gmail.com
+Expires: 2106-19-1T23:59:59.000Z
+Preferred-Languages: en
+Encryption: https://qr-menu-bay.vercel.app
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYKAB0WIQQSCTQ+1zcQeJxBCwlcq66SkR1gSgUCZ4wGfwAKCRBcq66SkR1g
+Si5RAQDmWXtBmgBTnLCrBruzaaaG4MZvMC1GKAcm4JyIk17hvQD/eu+AUq2b0vPv
+bsc/YZnL8rvbRoPY6jruE5Duy4kuug8=
+=Ou9S
+-----END PGP SIGNATURE-----

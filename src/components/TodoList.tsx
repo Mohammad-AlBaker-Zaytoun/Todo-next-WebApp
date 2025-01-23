@@ -25,7 +25,7 @@ export function TodoList({ updateTodoStats }: TodoListProps) {
       setTodos(todosArray);
       updateTodoStats(todosArray); // Update stats on initial load
     }
-  }, []);
+  }, [updateTodoStats]);
 
   // Save todos to Local Storage and update stats
   const saveToLocalStorage = (updatedTodos: TodoItemType[]) => {

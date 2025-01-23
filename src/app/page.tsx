@@ -85,7 +85,7 @@ export default function Home() {
           <div className="bg-blue-500 text-white w-20 h-20 flex justify-center items-center rounded-full text-2xl animate-pulse">
             {todosCount}
           </div>
-          <div className="text-gray-400">Added Todos</div>
+          <div className="text-gray-400">todosssss</div>
           <div className="bg-green-500 text-white w-20 h-20 flex justify-center items-center rounded-full text-2xl animate-pulse">
             {completedTodos}
           </div>
